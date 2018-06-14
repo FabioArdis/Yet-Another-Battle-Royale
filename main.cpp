@@ -55,10 +55,11 @@ void gioca()
 	nomina_tutti(giocatori);
 	do
 	{
+		printf("\n");
 		alive = contavivi(giocatori);
 		if (alive != VINCITORE)
 		{
-			printf("Round %d:\n", round);
+			printf("Round %d:\n\n", round);
 			kts = rand() % MAXKFR; //Kill this round
 			if(kts!=NOKILL)
 			{
