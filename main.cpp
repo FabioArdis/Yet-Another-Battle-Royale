@@ -123,7 +123,6 @@ void roba_random(SURVIVOR giocatori[], int alive, int *index)
 			*index = rand() % alive;
 		} while (giocatori[*index].vivo != true);
 		muori(&giocatori[*index]);
-		printf("Debug XD\n");
 }
 
 void notifica_uccisione(SURVIVOR giocatori[], int index)
