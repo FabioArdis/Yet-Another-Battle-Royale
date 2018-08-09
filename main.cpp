@@ -1,14 +1,15 @@
-#include <iostream>
-#include <string.h>
-#include <time.h>
+#include <iostream> //cout, cin...
+#include <string.h> //string type...
+#include <stdlib.h> //rand()...
+#include <time.h>   //time()...
 
 using namespace std;
 
-int players = 12;
-int playersAlive = players;
-int playersDead = 0;
-int round = 1;
-int countPosition = players;
+int players = 12;           //Number of players
+int playersAlive = players; //Number of players alive always equal to the players
+int playersDead = 0;        //Number of dead players
+int round = 1;              //What's the actual round?
+int countPosition = players;//What's the position of the dead player?
 
 string names[60] = {
 	"Sam", "Jude", "Leonard", "Alicia",
@@ -30,9 +31,9 @@ string names[60] = {
 
 struct Player
 {
-	string name;
-	bool isAlive = true;
-	int position = players;
+	string name;            //Player's name
+	bool isAlive = true;    //Player's status
+	int position = players; //Player's position (always the last)
 };
 
 struct Player* Players = new Player[players];
@@ -44,7 +45,7 @@ void playerEvent();
 
 int main(int argc, char const *argv[])
 {
-	start();
+	start();    //Initialize the game
 	return 0;
 }
 
@@ -52,15 +53,20 @@ void playRound()
 {
 	cout << "Round " << round << endl;
 	cout << "Players alive: " << playersAlive << endl << endl;
-	playerEvent();
-	round++;
+	playerEvent();  //Shows what happens
+	round++;        //Continues the round count
 	cout << endl << endl;
-	playRound();
-
+	playRound();    //Recursive function
 }
 
 void playerEvent()
 {
+    /*
+        If there's more than two players alive and if one
+        of the selected players is alive and not the only alive
+        then it plays a random event (dead or alive)
+    */
+
 	if(playersAlive > 1){
 		for (int i = 0; i < players; ++i)
 			if(Players[i].isAlive == true && playersAlive > 1)
@@ -98,8 +104,10 @@ void start()
 
 void resetPlayers()
 {
+    //Deletes the struct then it recreates itself.
 	delete [] Players;
 	struct Player* Players = new Player[players];
+	//Reinitialize the values.
 	for (int i = 0; i < players; ++i)
 	{
 		int r = (rand()%60);
